@@ -127,6 +127,23 @@ export const layer = Layer.effect(
         const user = Permission.fromConfig(cfg.permission ?? {})
 
         const agents: Record<string, Info> = {
+          orchestrator: {
+            name: "orchestrator",
+            description: "Agent manager. Analyzes user requests, answers simple queries directly, and decomposes complex problems into parallel subtasks using the task tool.",
+            options: {},
+            permission: Permission.merge(
+              defaults,
+              Permission.fromConfig({
+                question: "allow",
+                plan_enter: "allow",
+                task: "ask",
+              }),
+              user,
+            ),
+            mode: "primary",
+            native: true,
+            prompt: "You are the Orchestrator agent. For simple or atomic requests, fulfill them directly using the tools available to you. For complex or multi-step requests, you MUST decompose the problem and use the `task` tool to spawn specialized subagents (such as 'coder' or 'general') to perform the work in parallel or sequentially. Do not explain your plan, just invoke the tools.",
+          },
           build: {
             name: "build",
             description: "The default agent. Executes tools based on configured permissions.",
