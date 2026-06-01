@@ -96,7 +96,7 @@ function getConfig() {
         appId: "ai.opencode.desktop.beta",
         productName: "Orchestra Code Beta",
         protocols: { name: "Orchestra Code Beta", schemes: ["opencode"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "opencode-beta", channel: "latest" },
+        publish: { provider: "github", owner: "MEGZE-0", repo: "Orchestra-code", channel: "latest" },
         rpm: { packageName: "opencode-beta" },
       }
     }
@@ -106,7 +106,7 @@ function getConfig() {
         appId: "ai.opencode.desktop",
         productName: "Orchestra Code",
         protocols: { name: "Orchestra Code", schemes: ["opencode"] },
-        publish: { provider: "github", owner: "anomalyco", repo: "opencode", channel: "latest" },
+        publish: { provider: "github", owner: "MEGZE-0", repo: "Orchestra-code", channel: "latest" },
         rpm: { packageName: "opencode" },
       }
     }
