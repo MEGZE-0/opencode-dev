@@ -1,6 +1,6 @@
 # OrchestraCode — Build & Release Guide
 
-> **OrchestraCode** is a fork of [opencode](https://github.com/sst/opencode) rebranded and extended with multi-agent parallel orchestration, persistent memory, and a native desktop application.
+> **OrchestraCode** is a fork of [nexusflow](https://github.com/sst/nexusflow) rebranded and extended with multi-agent parallel orchestration, persistent memory, and a native desktop application.
 
 ---
 
@@ -9,7 +9,7 @@
 1. [Prerequisites](#prerequisites)
 2. [Project Layout](#project-layout)
 3. [Development Setup](#development-setup)
-4. [TUI / CLI (packages/opencode)](#tui--cli-packagesopencode)
+4. [TUI / CLI (packages/nexusflow)](#tui--cli-packagesnexusflow)
 5. [Desktop Application (packages/desktop)](#desktop-application-packagesdesktop)
 6. [Agents & Orchestration](#agents--orchestration)
 7. [Building for Release](#building-for-release)
@@ -37,7 +37,7 @@
 ```
 Orchestra-code/
 ├── packages/
-│   ├── opencode/          # Core TUI / CLI / server
+│   ├── nexusflow/          # Core TUI / CLI / server
 │   │   ├── src/
 │   │   │   ├── orchestrator/   # Multi-agent task orchestration
 │   │   │   ├── memory/         # Persistent memory (user + project)
@@ -49,8 +49,8 @@ Orchestra-code/
 │       ├── src/preload/   # Preload scripts
 │       ├── src/renderer/  # Web renderer (React)
 │       └── electron-builder.config.ts
-├── .opencode/
-│   ├── opencode.jsonc     # Project config (orchestrator, agents, etc.)
+├── .nexusflow/
+│   ├── nexusflow.jsonc     # Project config (orchestrator, agents, etc.)
 │   └── agents/            # Custom specialist sub-agents
 └── BUILD.md               # This file
 ```
@@ -68,18 +68,18 @@ cd Orchestra-code
 bun install
 
 # 3. Verify core types compile
-cd packages/opencode
+cd packages/nexusflow
 bun run typecheck
 ```
 
 ---
 
-## TUI / CLI (`packages/opencode`)
+## TUI / CLI (`packages/nexusflow`)
 
 ### Run in development
 
 ```bash
-cd packages/opencode
+cd packages/nexusflow
 bun run dev
 ```
 
@@ -88,33 +88,33 @@ This starts the TUI directly via `src/index.ts`.
 ### Type-check
 
 ```bash
-cd packages/opencode
+cd packages/nexusflow
 bun run typecheck
 ```
 
 ### Run tests
 
 ```bash
-cd packages/opencode
+cd packages/nexusflow
 bun test
 ```
 
-> ⚠️ Tests **must** be run from the `packages/opencode` directory, not the repo root.
+> ⚠️ Tests **must** be run from the `packages/nexusflow` directory, not the repo root.
 
 ### Build (compile to JavaScript)
 
 ```bash
-cd packages/opencode
+cd packages/nexusflow
 bun run build
 ```
 
-Output lands in `packages/opencode/dist/`.
+Output lands in `packages/nexusflow/dist/`.
 
 ---
 
 ## Desktop Application (`packages/desktop`)
 
-The desktop app wraps the OpenCode TUI in an Electron shell.
+The desktop app wraps the NexusFlow TUI in an Electron shell.
 
 ### Development
 
@@ -153,10 +153,10 @@ OrchestraCode automatically detects complex multi-step requests and spawns speci
 
 ### Sub-agents
 
-Custom agents live in `.opencode/agents/`. Each directory contains an `agent.jsonc`:
+Custom agents live in `.nexusflow/agents/`. Each directory contains an `agent.jsonc`:
 
 ```
-.opencode/agents/
+.nexusflow/agents/
 ├── researcher/
 │   └── agent.jsonc    # Research & analysis agent
 ├── coder/
@@ -167,7 +167,7 @@ Custom agents live in `.opencode/agents/`. Each directory contains an `agent.jso
 
 ### Orchestrator config
 
-Edit `.opencode/opencode.jsonc`:
+Edit `.nexusflow/nexusflow.jsonc`:
 
 ```jsonc
 {
@@ -194,13 +194,13 @@ When a request scores above the threshold, OrchestraCode:
 # In packages/desktop/package.json
 # Bump "version": "X.Y.Z"
 
-# Optionally also bump packages/opencode/package.json
+# Optionally also bump packages/nexusflow/package.json
 ```
 
 ### 2. Type-check & test
 
 ```bash
-cd packages/opencode
+cd packages/nexusflow
 bun run typecheck
 bun test
 ```
@@ -279,7 +279,7 @@ Ensure Bun is on `PATH`. Restart your terminal after installing.
 This is a known Bun-on-Windows issue with some npm packages moving cache files. Re-run `bun install` — it usually succeeds on the second attempt.
 
 ### Desktop app won't start
-1. Ensure `packages/opencode` built successfully
+1. Ensure `packages/nexusflow` built successfully
 2. Check that `dist/` exists in `packages/desktop`
 3. Run `npm run dev` from `packages/desktop` and check the Electron console
 

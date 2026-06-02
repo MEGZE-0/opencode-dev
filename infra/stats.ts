@@ -2,9 +2,9 @@ import { lakeAthenaWorkgroup, lakeCatalog, lakeCluster, lakeQueryPermissions, la
 import { EMAILOCTOPUS_API_KEY } from "./app"
 
 const domain = (() => {
-  if ($app.stage === "production") return "stats.opencode.ai"
-  if ($app.stage === "dev") return "stats.dev.opencode.ai"
-  return `stats.${$app.stage}.dev.opencode.ai`
+  if ($app.stage === "production") return "stats.nexusflow.ai"
+  if ($app.stage === "dev") return "stats.dev.nexusflow.ai"
+  return `stats.${$app.stage}.dev.nexusflow.ai`
 })()
 
 ////////////////
@@ -108,7 +108,7 @@ export const inferenceEvent = new sst.Linkable("InferenceEvent", {
 ////////////////
 
 const cluster = planetscale.getDatabaseOutput({
-  name: "opencode-stats",
+  name: "nexusflow-stats",
   organization: "anomalyco",
 })
 

@@ -1,68 +1,68 @@
 ---
 title: GitLab
-description: Usa OpenCode in issue e merge request su GitLab.
+description: Usa NexusFlow in issue e merge request su GitLab.
 ---
 
-OpenCode si integra nel tuo workflow GitLab tramite la pipeline GitLab CI/CD o con GitLab Duo.
+NexusFlow si integra nel tuo workflow GitLab tramite la pipeline GitLab CI/CD o con GitLab Duo.
 
-In entrambi i casi, OpenCode girera' sui tuoi runner GitLab.
+In entrambi i casi, NexusFlow girera' sui tuoi runner GitLab.
 
 ---
 
 ## GitLab CI
 
-OpenCode funziona in una pipeline GitLab standard. Puoi integrarlo nella pipeline come [componente CI](https://docs.gitlab.com/ee/ci/components/).
+NexusFlow funziona in una pipeline GitLab standard. Puoi integrarlo nella pipeline come [componente CI](https://docs.gitlab.com/ee/ci/components/).
 
-Qui usiamo un componente CI/CD creato dalla community per OpenCode — [nagyv/gitlab-opencode](https://gitlab.com/nagyv/gitlab-opencode).
+Qui usiamo un componente CI/CD creato dalla community per NexusFlow — [nagyv/gitlab-nexusflow](https://gitlab.com/nagyv/gitlab-nexusflow).
 
 ---
 
 ### Funzionalità
 
-- **Configurazione personalizzata per job**: configura OpenCode con una directory di configurazione personalizzata, ad esempio `./config/#custom-directory`, per abilitare o disabilitare funzionalita' per ogni invocazione di OpenCode.
-- **Setup minimo**: il componente CI prepara OpenCode in background; devi solo creare la configurazione OpenCode e il prompt iniziale.
+- **Configurazione personalizzata per job**: configura NexusFlow con una directory di configurazione personalizzata, ad esempio `./config/#custom-directory`, per abilitare o disabilitare funzionalita' per ogni invocazione di NexusFlow.
+- **Setup minimo**: il componente CI prepara NexusFlow in background; devi solo creare la configurazione NexusFlow e il prompt iniziale.
 - **Flessibile**: il componente CI supporta diversi input per personalizzarne il comportamento.
 
 ---
 
 ### Configurazione
 
-1. Salva il JSON di autenticazione di OpenCode come variabile d'ambiente CI di tipo File in **Settings** > **CI/CD** > **Variables**. Assicurati di marcarla come "Masked and hidden".
+1. Salva il JSON di autenticazione di NexusFlow come variabile d'ambiente CI di tipo File in **Settings** > **CI/CD** > **Variables**. Assicurati di marcarla come "Masked and hidden".
 2. Aggiungi quanto segue al tuo file `.gitlab-ci.yml`.
 
    ```yaml title=".gitlab-ci.yml"
    include:
-     - component: $CI_SERVER_FQDN/nagyv/gitlab-opencode/opencode@2
+     - component: $CI_SERVER_FQDN/nagyv/gitlab-nexusflow/nexusflow@2
        inputs:
-         config_dir: ${CI_PROJECT_DIR}/opencode-config
-         auth_json: $OPENCODE_AUTH_JSON # The variable name for your OpenCode authentication JSON
+         config_dir: ${CI_PROJECT_DIR}/nexusflow-config
+         auth_json: $NEXUSFLOW_AUTH_JSON # The variable name for your NexusFlow authentication JSON
          command: optional-custom-command
          message: "Your prompt here"
    ```
 
-Per altri input e casi d'uso, [consulta la documentazione](https://gitlab.com/explore/catalog/nagyv/gitlab-opencode) di questo componente.
+Per altri input e casi d'uso, [consulta la documentazione](https://gitlab.com/explore/catalog/nagyv/gitlab-nexusflow) di questo componente.
 
 ---
 
 ## GitLab Duo
 
-OpenCode si integra nel tuo workflow GitLab.
-Menziona `@opencode` in un commento e OpenCode eseguira' i task dentro la tua pipeline GitLab CI.
+NexusFlow si integra nel tuo workflow GitLab.
+Menziona `@nexusflow` in un commento e NexusFlow eseguira' i task dentro la tua pipeline GitLab CI.
 
 ---
 
 ### Funzionalità
 
-- **Triage delle issue**: chiedi a OpenCode di indagare su una issue e spiegartela.
-- **Fix e implementazioni**: chiedi a OpenCode di risolvere una issue o implementare una feature.
+- **Triage delle issue**: chiedi a NexusFlow di indagare su una issue e spiegartela.
+- **Fix e implementazioni**: chiedi a NexusFlow di risolvere una issue o implementare una feature.
   Creera' un nuovo branch e aprira' una merge request con le modifiche.
-- **Sicuro**: OpenCode gira sui tuoi runner GitLab.
+- **Sicuro**: NexusFlow gira sui tuoi runner GitLab.
 
 ---
 
 ### Configurazione
 
-OpenCode gira nella pipeline GitLab CI/CD. Ecco cosa ti serve per configurarlo:
+NexusFlow gira nella pipeline GitLab CI/CD. Ecco cosa ti serve per configurarlo:
 
 :::tip
 Dai un'occhiata alle [**GitLab docs**](https://docs.gitlab.com/user/duo_agent_platform/agent_assistant/) per istruzioni aggiornate.
@@ -82,8 +82,8 @@ Dai un'occhiata alle [**GitLab docs**](https://docs.gitlab.com/user/duo_agent_pl
     ```yaml
     image: node:22-slim
     commands:
-      - echo "Installing opencode"
-      - npm install --global opencode-ai
+      - echo "Installing nexusflow"
+      - npm install --global nexusflow-ai
       - echo "Installing glab"
       - export GITLAB_TOKEN=$GITLAB_TOKEN_OPENCODE
       - apt-get update --quiet && apt-get install --yes curl wget gpg git && rm --recursive --force /var/lib/apt/lists/*
@@ -91,10 +91,10 @@ Dai un'occhiata alle [**GitLab docs**](https://docs.gitlab.com/user/duo_agent_pl
       - apt-get install --yes glab
       - echo "Configuring glab"
       - echo $GITLAB_HOST
-      - echo "Creating OpenCode auth configuration"
-      - mkdir --parents ~/.local/share/opencode
+      - echo "Creating NexusFlow auth configuration"
+      - mkdir --parents ~/.local/share/nexusflow
       - |
-        cat > ~/.local/share/opencode/auth.json << EOF
+        cat > ~/.local/share/nexusflow/auth.json << EOF
         {
           "anthropic": {
             "type": "api",
@@ -103,13 +103,13 @@ Dai un'occhiata alle [**GitLab docs**](https://docs.gitlab.com/user/duo_agent_pl
         }
         EOF
       - echo "Configuring git"
-      - git config --global user.email "opencode@gitlab.com"
-      - git config --global user.name "OpenCode"
+      - git config --global user.email "nexusflow@gitlab.com"
+      - git config --global user.name "NexusFlow"
       - echo "Testing glab"
       - glab issue list
-      - echo "Running OpenCode"
+      - echo "Running NexusFlow"
       - |
-        opencode run "
+        nexusflow run "
         You are an AI assistant helping with GitLab operations.
 
         Context: $AI_FLOW_CONTEXT
@@ -158,10 +158,10 @@ Puoi fare riferimento alla [documentazione GitLab CLI agents](https://docs.gitla
 
 ### Esempi
 
-Ecco alcuni esempi di come puoi usare OpenCode in GitLab.
+Ecco alcuni esempi di come puoi usare NexusFlow in GitLab.
 
 :::tip
-Puoi configurare una frase trigger diversa da `@opencode`.
+Puoi configurare una frase trigger diversa da `@nexusflow`.
 :::
 
 - **Spiega una issue**
@@ -169,27 +169,27 @@ Puoi configurare una frase trigger diversa da `@opencode`.
   Aggiungi questo commento in una issue GitLab.
 
   ```
-  @opencode explain this issue
+  @nexusflow explain this issue
   ```
 
-  OpenCode leggera' la issue e rispondera' con una spiegazione chiara.
+  NexusFlow leggera' la issue e rispondera' con una spiegazione chiara.
 
 - **Risolvi una issue**
 
   In una issue GitLab, scrivi:
 
   ```
-  @opencode fix this
+  @nexusflow fix this
   ```
 
-  OpenCode creera' un nuovo branch, implementera' le modifiche e aprira' una merge request con i cambiamenti.
+  NexusFlow creera' un nuovo branch, implementera' le modifiche e aprira' una merge request con i cambiamenti.
 
 - **Rivedi merge request**
 
   Lascia il seguente commento su una merge request GitLab.
 
   ```
-  @opencode review this merge request
+  @nexusflow review this merge request
   ```
 
-  OpenCode rivedra' la merge request e fornira' feedback.
+  NexusFlow rivedra' la merge request e fornira' feedback.

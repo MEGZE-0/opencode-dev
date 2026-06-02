@@ -1,5 +1,6 @@
 import { sentryVitePlugin } from "@sentry/vite-plugin"
 import { defineConfig } from "vite"
+import monacoEditorPlugin from "vite-plugin-monaco-editor"
 import desktopPlugin from "./vite"
 
 const sentry =
@@ -20,7 +21,7 @@ const sentry =
     : false
 
 export default defineConfig({
-  plugins: [desktopPlugin, sentry] as any,
+  plugins: [desktopPlugin, sentry, monacoEditorPlugin({})] as any,
   server: {
     host: "0.0.0.0",
     allowedHosts: true,
@@ -29,5 +30,8 @@ export default defineConfig({
   build: {
     target: "esnext",
     sourcemap: true,
+  },
+  esbuild: {
+    jsx: "automatic",
   },
 })

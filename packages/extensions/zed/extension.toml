@@ -1,36 +1,36 @@
-id = "opencode"
-name = "OpenCode"
+id = "nexusflow"
+name = "NexusFlow"
 description = "The open source coding agent."
 version = "1.15.12"
 schema_version = 1
 authors = ["Anomaly"]
-repository = "https://github.com/anomalyco/opencode"
+repository = "https://github.com/anomalyco/nexusflow"
 
-[agent_servers.opencode]
-name = "OpenCode"
-icon = "./icons/opencode.svg"
+[agent_servers.nexusflow]
+name = "NexusFlow"
+icon = "./icons/nexusflow.svg"
 
-[agent_servers.opencode.targets.darwin-aarch64]
-archive = "https://github.com/anomalyco/opencode/releases/download/v1.15.12/opencode-darwin-arm64.zip"
-cmd = "./opencode"
+[agent_servers.nexusflow.targets.darwin-aarch64]
+archive = "https://github.com/anomalyco/nexusflow/releases/download/v1.15.12/nexusflow-darwin-arm64.zip"
+cmd = "./nexusflow"
 args = ["acp"]
 
-[agent_servers.opencode.targets.darwin-x86_64]
-archive = "https://github.com/anomalyco/opencode/releases/download/v1.15.12/opencode-darwin-x64.zip"
-cmd = "./opencode"
+[agent_servers.nexusflow.targets.darwin-x86_64]
+archive = "https://github.com/anomalyco/nexusflow/releases/download/v1.15.12/nexusflow-darwin-x64.zip"
+cmd = "./nexusflow"
 args = ["acp"]
 
-[agent_servers.opencode.targets.linux-aarch64]
-archive = "https://github.com/anomalyco/opencode/releases/download/v1.15.12/opencode-linux-arm64.tar.gz"
-cmd = "./opencode"
+[agent_servers.nexusflow.targets.linux-aarch64]
+archive = "https://github.com/anomalyco/nexusflow/releases/download/v1.15.12/nexusflow-linux-arm64.tar.gz"
+cmd = "./nexusflow"
 args = ["acp"]
 
-[agent_servers.opencode.targets.linux-x86_64]
-archive = "https://github.com/anomalyco/opencode/releases/download/v1.15.12/opencode-linux-x64.tar.gz"
-cmd = "./opencode"
+[agent_servers.nexusflow.targets.linux-x86_64]
+archive = "https://github.com/anomalyco/nexusflow/releases/download/v1.15.12/nexusflow-linux-x64.tar.gz"
+cmd = "./nexusflow"
 args = ["acp"]
 
-[agent_servers.opencode.targets.windows-x86_64]
-archive = "https://github.com/anomalyco/opencode/releases/download/v1.15.12/opencode-windows-x64.zip"
-cmd = "./opencode.exe"
+[agent_servers.nexusflow.targets.windows-x86_64]
+archive = "https://github.com/anomalyco/nexusflow/releases/download/v1.15.12/nexusflow-windows-x64.zip"
+cmd = "./nexusflow.exe"
 args = ["acp"]

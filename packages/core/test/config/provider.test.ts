@@ -1,11 +1,11 @@
 import { describe, expect } from "bun:test"
 import { Effect, Schema } from "effect"
-import { Catalog } from "@opencode-ai/core/catalog"
-import { Config } from "@opencode-ai/core/config"
-import { ConfigProviderPlugin } from "@opencode-ai/core/config/plugin/provider"
-import { ModelV2 } from "@opencode-ai/core/model"
-import { PluginV2 } from "@opencode-ai/core/plugin"
-import { ProviderV2 } from "@opencode-ai/core/provider"
+import { Catalog } from "@nexusflow/core/catalog"
+import { Config } from "@nexusflow/core/config"
+import { ConfigProviderPlugin } from "@nexusflow/core/config/plugin/provider"
+import { ModelV2 } from "@nexusflow/core/model"
+import { PluginV2 } from "@nexusflow/core/plugin"
+import { ProviderV2 } from "@nexusflow/core/provider"
 import { it } from "../plugin/provider-helper"
 
 function options(headers: Record<string, string>, variant?: string) {

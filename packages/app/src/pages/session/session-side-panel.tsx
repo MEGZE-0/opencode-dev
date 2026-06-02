@@ -1,20 +1,21 @@
 import { For, Match, Show, Switch, createEffect, createMemo, onCleanup, type JSX } from "solid-js"
 import { createStore } from "solid-js/store"
 import { createMediaQuery } from "@solid-primitives/media"
-import { Tabs } from "@opencode-ai/ui/tabs"
-import { IconButton } from "@opencode-ai/ui/icon-button"
-import { TooltipKeybind } from "@opencode-ai/ui/tooltip"
-import { ResizeHandle } from "@opencode-ai/ui/resize-handle"
-import { Mark } from "@opencode-ai/ui/logo"
+import { Tabs } from "@nexusflow/ui/tabs"
+import { IconButton } from "@nexusflow/ui/icon-button"
+import { TooltipKeybind } from "@nexusflow/ui/tooltip"
+import { ResizeHandle } from "@nexusflow/ui/resize-handle"
+import { Mark } from "@nexusflow/ui/logo"
 import { DragDropProvider, DragDropSensors, DragOverlay, SortableProvider, closestCenter } from "@thisbeyond/solid-dnd"
 import type { DragEvent } from "@thisbeyond/solid-dnd"
-import type { SnapshotFileDiff, VcsFileDiff } from "@opencode-ai/sdk/v2"
+import type { SnapshotFileDiff, VcsFileDiff } from "@nexusflow/sdk/v2"
 import { ConstrainDragYAxis, getDraggableId } from "@/utils/solid-dnd"
-import { useDialog } from "@opencode-ai/ui/context/dialog"
+import { useDialog } from "@nexusflow/ui/context/dialog"
 
 import FileTree from "@/components/file-tree"
 import { SessionContextUsage } from "@/components/session-context-usage"
 import { SessionContextTab, SortableTab, FileVisual } from "@/components/session"
+import { EditorTabs, type EditorFile } from "@/components/editor/editor-tabs"
 import { useCommand } from "@/context/command"
 import { useFile, type SelectedLineRange } from "@/context/file"
 import { useLanguage } from "@/context/language"
@@ -282,9 +283,6 @@ export function SessionSidePanel(props: {
                             </div>
                           </Tabs.Trigger>
                         </Show>
-                        <SortableProvider ids={openedTabs()}>
-                          <For each={openedTabs()}>{(tab) => <SortableTab tab={tab} onTabClose={tabs().close} />}</For>
-                        </SortableProvider>
                         <div class="bg-background-stronger h-full shrink-0 sticky right-0 z-10 flex items-center justify-center pr-3">
                           <TooltipKeybind
                             title={language.t("command.file.open")}
@@ -337,8 +335,33 @@ export function SessionSidePanel(props: {
                       </Tabs.Content>
                     </Show>
 
-                    <Show when={activeFileTab()} keyed>
-                      {(tab) => <FileTabContent tab={tab} />}
+                    <Show when={activeFileTab()}>
+                      <div
+                        class="flex flex-col h-full overflow-hidden contain-strict bg-background-base z-10"
+                        style={{ display: activeFileTab() ? "flex" : "none" }}
+                      >
+                        <EditorTabs
+                          files={
+                            openedTabs()
+                              .map((t) => {
+                                const p = file.pathFromTab(t)
+                                if (!p) return null
+                                return { path: p, content: file.get(p)?.content?.content || "", dirty: false }
+                              })
+                              .filter(Boolean) as EditorFile[]
+                          }
+                          activePath={activeFileTab() ? file.pathFromTab(activeFileTab()!) : undefined}
+                          onSave={async (f) => {
+                            // save file
+                          }}
+                          onTabSelect={(path) => {
+                            tabs().setActive(file.tab(path))
+                          }}
+                          onTabClose={(path) => {
+                            tabs().close(file.tab(path))
+                          }}
+                        />
+                      </div>
                     </Show>
                   </Tabs>
                   <DragOverlay>

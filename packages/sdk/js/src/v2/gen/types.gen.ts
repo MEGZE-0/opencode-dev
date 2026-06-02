@@ -497,6 +497,7 @@ export type SubtaskPart = {
   prompt: string
   description: string
   agent: string
+  background?: boolean
   model?: {
     providerID: string
     modelID: string
@@ -926,7 +927,7 @@ export type GlobalEvent = {
 export type LogLevel = "DEBUG" | "INFO" | "WARN" | "ERROR"
 
 /**
- * Server configuration for opencode serve and web commands
+ * Server configuration for nexusflow serve and web commands
  */
 export type ServerConfig = {
   port?: number
@@ -1316,6 +1317,7 @@ export type Config = {
     batch_tool?: boolean
     openTelemetry?: boolean
     primary_tools?: Array<string>
+    auto_task_routing?: boolean
     continue_loop_on_deny?: boolean
     mcp_timeout?: number
     policies?: Array<ConfigV2ExperimentalPolicy>
@@ -1417,6 +1419,32 @@ export type Provider = {
   models: {
     [key: string]: Model
   }
+}
+
+export type CreatorKind = "agent" | "skill"
+
+export type CreatorDraftInput = {
+  kind: CreatorKind
+  name: string
+  description: string
+  write?: boolean
+}
+
+export type CreatorDraftFile = {
+  path: string
+  content: string
+}
+
+export type CreatorDraftResult = {
+  kind: CreatorKind
+  name: string
+  model: {
+    providerID: string
+    modelID: string
+    tier: "compact" | "standard"
+  }
+  files: Array<CreatorDraftFile>
+  written: boolean
 }
 
 export type ConsoleState = {
@@ -1838,6 +1866,7 @@ export type SubtaskPartInput = {
   prompt: string
   description: string
   agent: string
+  background?: boolean
   model?: {
     providerID: string
     modelID: string
@@ -4223,6 +4252,34 @@ export type ConfigProvidersResponses = {
 
 export type ConfigProvidersResponse = ConfigProvidersResponses[keyof ConfigProvidersResponses]
 
+export type CreatorDraftData = {
+  body?: CreatorDraftInput
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/creator/draft"
+}
+
+export type CreatorDraftErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+}
+
+export type CreatorDraftError = CreatorDraftErrors[keyof CreatorDraftErrors]
+
+export type CreatorDraftResponses = {
+  /**
+   * Generated creator draft
+   */
+  200: CreatorDraftResult
+}
+
+export type CreatorDraftResponse = CreatorDraftResponses[keyof CreatorDraftResponses]
+
 export type ExperimentalConsoleGetData = {
   body?: never
   path?: never
@@ -4747,6 +4804,92 @@ export type FileStatusResponses = {
 }
 
 export type FileStatusResponse = FileStatusResponses[keyof FileStatusResponses]
+
+export type FileCreateData = {
+  body?: {
+    path: string
+    type: "file" | "directory"
+  }
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/file/create"
+}
+
+export type FileCreateErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+}
+
+export type FileCreateError = FileCreateErrors[keyof FileCreateErrors]
+
+export type FileCreateResponses = {
+  /**
+   * Success
+   */
+  200: unknown
+}
+
+export type FileRenameData = {
+  body?: {
+    oldPath: string
+    newPath: string
+  }
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/file/rename"
+}
+
+export type FileRenameErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+}
+
+export type FileRenameError = FileRenameErrors[keyof FileRenameErrors]
+
+export type FileRenameResponses = {
+  /**
+   * Success
+   */
+  200: unknown
+}
+
+export type FileDeleteData = {
+  body?: {
+    path: string
+  }
+  path?: never
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/file/delete"
+}
+
+export type FileDeleteErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+}
+
+export type FileDeleteError = FileDeleteErrors[keyof FileDeleteErrors]
+
+export type FileDeleteResponses = {
+  /**
+   * Success
+   */
+  200: unknown
+}
 
 export type InstanceDisposeData = {
   body?: never

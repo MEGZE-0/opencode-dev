@@ -2,12 +2,12 @@
 
 ## Sources
 
-- PR #12283: https://github.com/anomalyco/opencode/pull/12283
+- PR #12283: https://github.com/anomalyco/nexusflow/pull/12283
 
 ## Do Not Translate (Locale Additions)
 
-- `OpenCode` (preserve casing in prose; keep `opencode` only in commands, package names, paths, or code)
-- `OpenCode CLI`
+- `NexusFlow` (preserve casing in prose; keep `nexusflow` only in commands, package names, paths, or code)
+- `NexusFlow CLI`
 - `CLI`, `TUI`, `MCP`, `OAuth`
 - Commands, flags, file paths, and code literals (keep exactly as written)
 

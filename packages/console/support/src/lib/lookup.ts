@@ -1,8 +1,8 @@
 "use server"
 
-import { Database, and, eq, isNull, sql } from "@opencode-ai/console-core/drizzle/index.js"
-import { AuthTable } from "@opencode-ai/console-core/schema/auth.sql.js"
-import { UserTable } from "@opencode-ai/console-core/schema/user.sql.js"
+import { Database, and, eq, isNull, sql } from "@nexusflow/console-core/drizzle/index.js"
+import { AuthTable } from "@nexusflow/console-core/schema/auth.sql.js"
+import { UserTable } from "@nexusflow/console-core/schema/user.sql.js"
 import {
   BillingTable,
   PaymentTable,
@@ -10,15 +10,15 @@ import {
   BlackPlans,
   UsageTable,
   LiteTable,
-} from "@opencode-ai/console-core/schema/billing.sql.js"
-import { WorkspaceTable } from "@opencode-ai/console-core/schema/workspace.sql.js"
-import { KeyTable } from "@opencode-ai/console-core/schema/key.sql.js"
-import { ModelTable } from "@opencode-ai/console-core/schema/model.sql.js"
-import { BlackData } from "@opencode-ai/console-core/black.js"
-import { LiteData } from "@opencode-ai/console-core/lite.js"
-import { Subscription } from "@opencode-ai/console-core/subscription.js"
-import { centsToMicroCents } from "@opencode-ai/console-core/util/price.js"
-import { getWeekBounds } from "@opencode-ai/console-core/util/date.js"
+} from "@nexusflow/console-core/schema/billing.sql.js"
+import { WorkspaceTable } from "@nexusflow/console-core/schema/workspace.sql.js"
+import { KeyTable } from "@nexusflow/console-core/schema/key.sql.js"
+import { ModelTable } from "@nexusflow/console-core/schema/model.sql.js"
+import { BlackData } from "@nexusflow/console-core/black.js"
+import { LiteData } from "@nexusflow/console-core/lite.js"
+import { Subscription } from "@nexusflow/console-core/subscription.js"
+import { centsToMicroCents } from "@nexusflow/console-core/util/price.js"
+import { getWeekBounds } from "@nexusflow/console-core/util/date.js"
 
 export type LookupResult = {
   identifier: string

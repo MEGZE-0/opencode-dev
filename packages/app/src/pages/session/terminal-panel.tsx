@@ -1,10 +1,10 @@
 import { For, Show, createEffect, createMemo, on, onCleanup, onMount } from "solid-js"
 import { createStore } from "solid-js/store"
 import { makeEventListener } from "@solid-primitives/event-listener"
-import { Tabs } from "@opencode-ai/ui/tabs"
-import { ResizeHandle } from "@opencode-ai/ui/resize-handle"
-import { IconButton } from "@opencode-ai/ui/icon-button"
-import { TooltipKeybind } from "@opencode-ai/ui/tooltip"
+import { Tabs } from "@nexusflow/ui/tabs"
+import { ResizeHandle } from "@nexusflow/ui/resize-handle"
+import { IconButton } from "@nexusflow/ui/icon-button"
+import { TooltipKeybind } from "@nexusflow/ui/tooltip"
 import { DragDropProvider, DragDropSensors, DragOverlay, SortableProvider, closestCenter } from "@thisbeyond/solid-dnd"
 import type { DragEvent } from "@thisbeyond/solid-dnd"
 import { ConstrainDragYAxis, getDraggableId } from "@/utils/solid-dnd"
@@ -292,7 +292,7 @@ export function TerminalPanel() {
                     return (
                       <Show when={all().find((pty) => pty.id === id)}>
                         {(pty) => (
-                          <div id={`terminal-wrapper-${id}`} class="absolute inset-0">
+                          <div id={`terminal-wrapper-${id}`} class="absolute inset-0 hermes-terminal-overlay">
                             <Terminal
                               pty={pty()}
                               autoFocus={opened()}

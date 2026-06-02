@@ -1,12 +1,12 @@
 import { useServerSync } from "@/context/server-sync"
 import { decode64 } from "@/utils/base64"
+import type { Provider } from "@nexusflow/sdk/v2"
 import { useParams } from "@solidjs/router"
-import { Iterable, pipe } from "effect"
 import { createMemo } from "solid-js"
 
 export const popularProviders = [
-  "opencode",
-  "opencode-go",
+  "nexusflow",
+  "nexusflow-go",
   "anthropic",
   "github-copilot",
   "openai",
@@ -31,31 +31,19 @@ export function useProviders() {
     all: () => providers().all,
     default: () => providers().default,
     popular: () =>
-      pipe(
-        providers().all,
-        Iterable.map(([, p]) => p),
-        Iterable.filter((p) => popularProviderSet.has(p.id)),
-        (v) => Array.from(v),
-      ),
+      Array.from(providers().all.values()).filter((provider: Provider) => popularProviderSet.has(provider.id)),
     connected: () => {
       const connected = new Set(providers().connected)
-      return pipe(
-        providers().all,
-        Iterable.map(([, p]) => p),
-        Iterable.filter((p) => connected.has(p.id)),
-        (v) => Array.from(v),
-      )
+      return Array.from(providers().all.values()).filter((provider: Provider) => connected.has(provider.id))
     },
     paid: () => {
       const connected = new Set(providers().connected)
-      return [
-        ...Iterable.filter(
-          providers().all,
-          ([id]) =>
-            connected.has(id) &&
-            (id !== "opencode" || Object.values(providers().all.get(id)?.models ?? {}).some((m) => m.cost?.input)),
-        ),
-      ]
+      return Array.from(providers().all).filter(
+        ([id]) =>
+          connected.has(id) &&
+          (id !== "nexusflow" ||
+            Object.values(providers().all.get(id)?.models ?? {}).some((model) => model.cost?.input)),
+      )
     },
   }
 }

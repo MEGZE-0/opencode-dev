@@ -1,16 +1,16 @@
 import { describe, expect } from "bun:test"
 import { Effect, Layer } from "effect"
-import { AccountV2 } from "@opencode-ai/core/account"
-import { Catalog } from "@opencode-ai/core/catalog"
-import { Location } from "@opencode-ai/core/location"
-import { EventV2 } from "@opencode-ai/core/event"
-import { ModelV2 } from "@opencode-ai/core/model"
-import { PluginV2 } from "@opencode-ai/core/plugin"
-import { Policy } from "@opencode-ai/core/policy"
-import { AccountPlugin } from "@opencode-ai/core/plugin/account"
-import { CloudflareWorkersAIPlugin } from "@opencode-ai/core/plugin/provider/cloudflare-workers-ai"
-import { ProviderV2 } from "@opencode-ai/core/provider"
-import { AbsolutePath } from "@opencode-ai/core/schema"
+import { AccountV2 } from "@nexusflow/core/account"
+import { Catalog } from "@nexusflow/core/catalog"
+import { Location } from "@nexusflow/core/location"
+import { EventV2 } from "@nexusflow/core/event"
+import { ModelV2 } from "@nexusflow/core/model"
+import { PluginV2 } from "@nexusflow/core/plugin"
+import { Policy } from "@nexusflow/core/policy"
+import { AccountPlugin } from "@nexusflow/core/plugin/account"
+import { CloudflareWorkersAIPlugin } from "@nexusflow/core/plugin/provider/cloudflare-workers-ai"
+import { ProviderV2 } from "@nexusflow/core/provider"
+import { AbsolutePath } from "@nexusflow/core/schema"
 import { location } from "../fixture/location"
 import { testEffect } from "../lib/effect"
 import { fakeSelectorSdk, it, model, npmLayer, withEnv } from "./provider-helper"
@@ -213,7 +213,7 @@ describe("CloudflareWorkersAIPlugin", () => {
         const headers = yield* Effect.promise(() => Promise.resolve(cloudflareHeaders(result.sdk)))
         expect(headers.authorization).toBe("Bearer env-key")
         expect(headers.custom).toBe("header")
-        expect(headers["user-agent"]).toMatch(/^opencode\/.* cloudflare-workers-ai \(.+\) ai-sdk\/openai-compatible\//)
+        expect(headers["user-agent"]).toMatch(/^nexusflow\/.* cloudflare-workers-ai \(.+\) ai-sdk\/openai-compatible\//)
       }),
     ),
   )

@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js"
-import { Dialog } from "@opencode-ai/ui/dialog"
-import { Button } from "@opencode-ai/ui/button"
-import { useDialog } from "@opencode-ai/ui/context/dialog"
+import { Dialog } from "@nexusflow/ui/dialog"
+import { Button } from "@nexusflow/ui/button"
+import { useDialog } from "@nexusflow/ui/context/dialog"
 import { useLanguage } from "@/context/language"
 import { useSettings } from "@/context/settings"
 

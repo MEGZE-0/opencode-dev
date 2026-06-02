@@ -1,6 +1,6 @@
-# OpenCode Desktop
+# NexusFlow Desktop
 
-The OpenCode Desktop app, built with Electron.
+The NexusFlow Desktop app, built with Electron.
 
 ## Development
 

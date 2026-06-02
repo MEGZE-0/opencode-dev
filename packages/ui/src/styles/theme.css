@@ -2,7 +2,7 @@
   --font-family-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-family-sans--font-feature-settings: normal;
   --font-family-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-family-mono--font-feature-settings: normal;
 
   --font-size-small: 13px;
@@ -189,9 +189,9 @@
   --text-on-warning-strong: rgba(0, 0, 0, 0.915);
   --text-on-success-weak: #96ec8e;
   --text-on-success-strong: #044202;
-  --text-on-brand-weak: rgba(0, 0, 0, 0.453);
-  --text-on-brand-weaker: rgba(0, 0, 0, 0.232);
-  --text-on-brand-strong: rgba(0, 0, 0, 0.915);
+  --text-on-brand-weak: rgba(0, 0, 0, 0.404);
+  --text-on-brand-weaker: rgba(0, 0, 0, 0.266);
+  --text-on-brand-strong: rgba(0, 0, 0, 0.928);
   --button-primary-base: #171717;
   --button-secondary-base: #fcfcfc;
   --button-secondary-hover: #f8f8f8;
@@ -259,7 +259,10 @@
   --icon-strong-selected: #020202;
   --icon-strong-disabled: #c7c7c7;
   --icon-strong-focus: #020202;
-  --icon-brand-base: #171717;
+  --icon-brand-base: #00f0ff;
+  --icon-on-brand-base: rgba(0, 0, 0, 0.603);
+  --icon-on-brand-hover: rgba(0, 0, 0, 0.928);
+  --icon-on-brand-selected: rgba(0, 0, 0, 0.928);
   --icon-interactive-base: #034cff;
   --icon-success-base: #7add71;
   --icon-success-hover: #4cc944;
@@ -351,7 +354,7 @@
     --text-mix-blend-mode: plus-lighter;
 
     /* OC-2 fallback variables (dark) */
-    --background-base: #101010;
+    --background-base: #000000;
     --background-weak: #1e1e1e;
     --background-strong: #121212;
     --background-stronger: #151515;
@@ -380,8 +383,8 @@
     --surface-strong: rgba(255, 255, 255, 0.169);
     --surface-stronger-non-alpha: var(--surface-raised-stronger-non-alpha);
     --surface-raised-stronger-non-alpha: #1c1c1c;
-    --surface-brand-base: #fab283;
-    --surface-brand-hover: #eda779;
+    --surface-brand-base: #00f0ff;
+    --surface-brand-hover: #00d0dd;
     --surface-interactive-base: #091f52;
     --surface-interactive-hover: #091f52;
     --surface-interactive-weak: #0b1730;
@@ -430,7 +433,7 @@
     --text-invert-weaker: #505050;
     --text-invert-strong: #ededed;
     --text-interactive-base: #9dbefe;
-    --text-on-brand-base: rgba(255, 255, 255, 0.603);
+    --text-on-brand-base: rgba(0, 0, 0, 0.603);
     --text-on-interactive-base: #ededed;
     --text-on-interactive-weak: rgba(255, 255, 255, 0.603);
     --text-on-success-base: #12c905;
@@ -449,9 +452,9 @@
     --text-on-warning-strong: rgba(255, 255, 255, 0.928);
     --text-on-success-weak: #127d0d;
     --text-on-success-strong: #bafdb3;
-    --text-on-brand-weak: rgba(255, 255, 255, 0.404);
-    --text-on-brand-weaker: rgba(255, 255, 255, 0.266);
-    --text-on-brand-strong: rgba(255, 255, 255, 0.928);
+    --text-on-brand-weak: rgba(0, 0, 0, 0.404);
+    --text-on-brand-weaker: rgba(0, 0, 0, 0.266);
+    --text-on-brand-strong: rgba(0, 0, 0, 0.928);
     --button-primary-base: #ededed;
     --button-secondary-base: #1c1c1c;
     --button-secondary-hover: rgba(255, 255, 255, 0.039);
@@ -519,7 +522,7 @@
     --icon-strong-selected: #fdfcfc;
     --icon-strong-disabled: #3e3e3e;
     --icon-strong-focus: #fdfcfc;
-    --icon-brand-base: #ffffff;
+    --icon-brand-base: #00f0ff;
     --icon-interactive-base: #034cff;
     --icon-success-base: #12c905;
     --icon-success-hover: #35c02d;
@@ -533,9 +536,9 @@
     --icon-info-base: #68446b;
     --icon-info-hover: #815484;
     --icon-info-active: #dfa7e3;
-    --icon-on-brand-base: rgba(255, 255, 255, 0.603);
-    --icon-on-brand-hover: rgba(255, 255, 255, 0.928);
-    --icon-on-brand-selected: rgba(255, 255, 255, 0.928);
+    --icon-on-brand-base: rgba(0, 0, 0, 0.603);
+    --icon-on-brand-hover: rgba(0, 0, 0, 0.928);
+    --icon-on-brand-selected: rgba(0, 0, 0, 0.928);
     --icon-on-interactive-base: #ededed;
     --icon-agent-plan-base: #edb2f1;
     --icon-agent-docs-base: #fbb73c;

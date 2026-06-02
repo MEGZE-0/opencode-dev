@@ -1,13 +1,13 @@
 import { createEffect, createMemo, For, mapArray, Match, Show, startTransition, Switch, untrack } from "solid-js"
 import { createStore, produce } from "solid-js/store"
 import { useLocation, useMatch, useNavigate, useParams } from "@solidjs/router"
-import { IconButton } from "@opencode-ai/ui/icon-button"
-import { Icon } from "@opencode-ai/ui/icon"
-import { Button } from "@opencode-ai/ui/button"
-import { Tooltip, TooltipKeybind } from "@opencode-ai/ui/tooltip"
-import { useTheme } from "@opencode-ai/ui/theme/context"
-import { IconButtonV2 } from "@opencode-ai/ui/v2/components/icon-button-v2.jsx"
-import { Icon as IconV2 } from "@opencode-ai/ui/v2/components/icon.jsx"
+import { IconButton } from "@nexusflow/ui/icon-button"
+import { Icon } from "@nexusflow/ui/icon"
+import { Button } from "@nexusflow/ui/button"
+import { Tooltip, TooltipKeybind } from "@nexusflow/ui/tooltip"
+import { useTheme } from "@nexusflow/ui/theme/context"
+import { IconButtonV2 } from "@nexusflow/ui/v2/components/icon-button-v2.jsx"
+import { Icon as IconV2 } from "@nexusflow/ui/v2/components/icon.jsx"
 
 import { getAvatarColors, useLayout, type LocalProject } from "@/context/layout"
 import { usePlatform } from "@/context/platform"
@@ -18,9 +18,9 @@ import { WindowsAppMenu } from "./windows-app-menu"
 import { applyPath, backPath, forwardPath } from "./titlebar-history"
 import { useServerSync } from "@/context/server-sync"
 import { decodeDirectory } from "@/pages/directory-layout"
-import { iife } from "@opencode-ai/core/util/iife"
-import { base64Encode } from "@opencode-ai/core/util/encode"
-import { Avatar as AvatarV2 } from "@opencode-ai/ui/v2/components/avatar-v2.jsx"
+import { iife } from "@nexusflow/core/util/iife"
+import { base64Encode } from "@nexusflow/core/util/encode"
+import { Avatar as AvatarV2 } from "@nexusflow/ui/v2/components/avatar-v2.jsx"
 import { displayName, getProjectAvatarSource, projectForSession } from "@/pages/layout/helpers"
 import { makeEventListener } from "@solid-primitives/event-listener"
 import { StatusPopoverV2 } from "@/components/status-popover"
@@ -650,7 +650,7 @@ export function Titlebar(props: { update?: TitlebarUpdate }) {
                         </Tooltip>
                       </div>
                     </Show>
-                    <div id="opencode-titlebar-left" class="flex items-center gap-3 min-w-0 px-2" />
+                    <div id="nexusflow-titlebar-left" class="flex items-center gap-3 min-w-0 px-2" />
                     <ChannelIndicator />
                   </div>
                 </div>
@@ -659,7 +659,7 @@ export function Titlebar(props: { update?: TitlebarUpdate }) {
 
             <div class="min-w-0 flex items-center justify-center pointer-events-none">
               <div
-                id="opencode-titlebar-center"
+                id="nexusflow-titlebar-center"
                 class="pointer-events-auto min-w-0 flex justify-center w-fit max-w-full"
               />
             </div>
@@ -672,7 +672,17 @@ export function Titlebar(props: { update?: TitlebarUpdate }) {
               data-tauri-drag-region
               onMouseDown={drag}
             >
-              <div id="opencode-titlebar-right" class="flex items-center gap-1 shrink-0 justify-end" />
+              <div id="nexusflow-titlebar-right" class="flex items-center gap-1 shrink-0 justify-end">
+                <Tooltip placement="bottom" value="GitHub Repository" openDelay={500}>
+                  <IconButton
+                    icon="github"
+                    variant="ghost"
+                    class="titlebar-icon w-8 h-8 p-0 box-border"
+                    onClick={() => window.open("https://github.com/opencode-ai/opencode", "_blank")}
+                    aria-label="GitHub"
+                  />
+                </Tooltip>
+              </div>
               <Show when={windows()}>
                 {!tauriApi() && <div class="shrink-0" style={{ width: windowsControlsWidth() }} />}
                 <div data-tauri-decorum-tb class="flex flex-row" />
@@ -709,7 +719,16 @@ function TitlebarV2Right(props: { state: TitlebarV2RightState }) {
           <StatusPopoverV2 scope="server" />
         </Tooltip>
       </Show>
-      <div id="opencode-titlebar-right" class="flex shrink-0 items-center justify-end gap-0" />
+      <Tooltip placement="bottom" value="GitHub Repository" openDelay={500}>
+        <IconButtonV2
+          icon={<Icon name="github" />}
+          variant="ghost-muted"
+          size="normal"
+          onClick={() => window.open("https://github.com/opencode-ai/opencode", "_blank")}
+          aria-label="GitHub"
+        />
+      </Tooltip>
+      <div id="nexusflow-titlebar-right" class="flex shrink-0 items-center justify-end gap-0" />
     </div>
   )
 }
@@ -823,9 +842,9 @@ function NewSessionTabItem(props: { href: string; title: string; onClose: () => 
 function ChannelIndicator() {
   return (
     <>
-      {["beta", "dev"].includes(import.meta.env.VITE_OPENCODE_CHANNEL) && (
+      {["beta", "dev"].includes(import.meta.env.VITE_NEXUSFLOW_CHANNEL) && (
         <div class="bg-icon-interactive-base text-[#FFF] font-medium px-2 rounded-sm uppercase font-mono">
-          {import.meta.env.VITE_OPENCODE_CHANNEL.toUpperCase()}
+          {import.meta.env.VITE_NEXUSFLOW_CHANNEL.toUpperCase()}
         </div>
       )}
     </>

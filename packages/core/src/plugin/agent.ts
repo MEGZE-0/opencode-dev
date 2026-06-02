@@ -150,7 +150,8 @@ export const Plugin = PluginV2.define({
               },
               edit: {
                 "*": "deny",
-                [path.join(".opencode", "plans", "*.md")]: "allow",
+                [path.join(".nexusflow", "plans", "*.md")]: "allow",
+                [path.join(".nexusflow", "plans", "*.md")]: "allow",
                 [path.relative(worktree, path.join(Global.Path.data, "plans", "*.md"))]: "allow",
               },
             }),

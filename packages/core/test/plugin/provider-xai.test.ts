@@ -1,9 +1,9 @@
 import { describe, expect } from "bun:test"
 import { Effect } from "effect"
-import { ModelV2 } from "@opencode-ai/core/model"
-import { PluginV2 } from "@opencode-ai/core/plugin"
-import { XAIPlugin } from "@opencode-ai/core/plugin/provider/xai"
-import { ProviderV2 } from "@opencode-ai/core/provider"
+import { ModelV2 } from "@nexusflow/core/model"
+import { PluginV2 } from "@nexusflow/core/plugin"
+import { XAIPlugin } from "@nexusflow/core/plugin/provider/xai"
+import { ProviderV2 } from "@nexusflow/core/provider"
 import { testEffect } from "../lib/effect"
 import { fakeSelectorSdk } from "./provider-helper"
 

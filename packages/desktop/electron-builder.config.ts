@@ -21,13 +21,13 @@ async function signWindows(configuration: { path: string }) {
 }
 
 const channel = (() => {
-  const raw = process.env.OPENCODE_CHANNEL
+  const raw = process.env.NEXUSFLOW_CHANNEL
   if (raw === "dev" || raw === "beta" || raw === "prod") return raw
   return "dev"
 })()
 
 const getBase = (): Configuration => ({
-  artifactName: "opencode-desktop-${os}-${arch}.${ext}",
+  artifactName: "nexusflow-desktop-${os}-${arch}.${ext}",
   directories: {
     output: "dist",
     buildResources: "resources",
@@ -54,8 +54,8 @@ const getBase = (): Configuration => ({
     sign: true,
   },
   protocols: {
-    name: "OpenCode",
-    schemes: ["opencode"],
+    name: "NexusFlow",
+    schemes: ["nexusflow"],
   },
   win: {
     icon: `resources/icons/icon.ico`,
@@ -66,7 +66,8 @@ const getBase = (): Configuration => ({
     verifyUpdateCodeSignature: false,
   },
   nsis: {
-    oneClick: true,
+    oneClick: false,
+    allowToChangeInstallationDirectory: true,
     perMachine: false,
     installerIcon: `resources/icons/icon.ico`,
     installerHeaderIcon: `resources/icons/icon.ico`,
@@ -85,29 +86,29 @@ function getConfig() {
     case "dev": {
       return {
         ...base,
-        appId: "ai.opencode.desktop.dev",
+        appId: "ai.nexusflow.desktop.dev",
         productName: "Orchestra Code Dev",
-        rpm: { packageName: "opencode-dev" },
+        rpm: { packageName: "nexusflow-dev" },
       }
     }
     case "beta": {
       return {
         ...base,
-        appId: "ai.opencode.desktop.beta",
+        appId: "ai.nexusflow.desktop.beta",
         productName: "Orchestra Code Beta",
-        protocols: { name: "Orchestra Code Beta", schemes: ["opencode"] },
+        protocols: { name: "Orchestra Code Beta", schemes: ["nexusflow"] },
         publish: { provider: "github", owner: "MEGZE-0", repo: "Orchestra-code", channel: "latest" },
-        rpm: { packageName: "opencode-beta" },
+        rpm: { packageName: "nexusflow-beta" },
       }
     }
     case "prod": {
       return {
         ...base,
-        appId: "ai.opencode.desktop",
+        appId: "ai.nexusflow.desktop",
         productName: "Orchestra Code",
-        protocols: { name: "Orchestra Code", schemes: ["opencode"] },
+        protocols: { name: "Orchestra Code", schemes: ["nexusflow"] },
         publish: { provider: "github", owner: "MEGZE-0", repo: "Orchestra-code", channel: "latest" },
-        rpm: { packageName: "opencode" },
+        rpm: { packageName: "nexusflow" },
       }
     }
   }

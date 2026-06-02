@@ -1,5 +1,5 @@
-@import "@opencode-ai/ui/styles/tailwind";
-@import "@opencode-ai/ui/v2/styles/tailwind.css";
+@import "@nexusflow/ui/styles/tailwind";
+@import "@nexusflow/ui/v2/styles/tailwind.css";
 
 @font-face {
   font-family: "JetBrainsMono Nerd Font Mono";
@@ -15,7 +15,115 @@
   font-style: normal;
 }
 
+@layer theme {
+  :root {
+    color-scheme: dark;
+    --font-family-sans: "JetBrainsMono Nerd Font Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+    --font-family-mono: "JetBrainsMono Nerd Font Mono", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+    --background-base: #030303;
+    --background-weak: #080808;
+    --background-strong: #050505;
+    --background-stronger: #0b0b0b;
+    --surface-panel: #080808;
+    --surface-panel-hover: #0c0c0c;
+    --border-base: rgba(0, 240, 255, 0.18);
+    --border-weak: rgba(0, 240, 255, 0.1);
+    --border-strong: rgba(0, 240, 255, 0.35);
+    --text-base: #e4e4e7;
+    --text-weak: rgba(228, 228, 231, 0.68);
+    --text-weaker: rgba(228, 228, 231, 0.42);
+    --text-strong: #fafafa;
+    --text-stronger: #ffffff;
+    --text-interactive-base: #00f0ff;
+    --icon-base: rgba(228, 228, 231, 0.68);
+    --icon-strong-base: #e4e4e7;
+    --icon-interactive-base: #00f0ff;
+    --background-interactive-base: rgba(0, 240, 255, 0.14);
+    --background-interactive-weak: rgba(0, 240, 255, 0.08);
+    --background-success-base: rgba(16, 185, 129, 0.18);
+    --text-diff-add-base: #10b981;
+    --text-diff-add-strong: #d1fae5;
+    --background-diff-add-base: rgba(16, 185, 129, 0.18);
+    --background-diff-add-weak: rgba(16, 185, 129, 0.1);
+    --shadow-xs-border-focus: 0 0 0 1px rgba(0, 240, 255, 0.55), 0 0 10px rgba(0, 240, 255, 0.15);
+    --shadow-xs-border-select: 0 0 0 1px rgba(0, 240, 255, 0.42), 0 0 10px rgba(0, 240, 255, 0.15);
+    --shadow-xs-border-hover: 0 0 0 1px rgba(0, 240, 255, 0.26), 0 0 8px rgba(0, 240, 255, 0.12);
+  }
+}
+
+@layer base {
+  html,
+  body {
+    background: #030303;
+  }
+
+  body {
+    color: #e4e4e7;
+    font-family: var(--font-family-mono);
+  }
+
+  ::selection {
+    color: #030303;
+    background: #00f0ff;
+  }
+}
+
 @layer components {
+  @keyframes hermes-thinking-ring {
+    0% {
+      transform: rotate(0deg) scale(0.96);
+      box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.45);
+    }
+
+    50% {
+      transform: rotate(180deg) scale(1);
+      box-shadow: 0 0 18px 3px rgba(168, 85, 247, 0.28);
+    }
+
+    100% {
+      transform: rotate(360deg) scale(0.96);
+      box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.45);
+    }
+  }
+
+  .hermes-glow {
+    border-color: rgba(0, 240, 255, 0.22);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+  }
+
+  .hermes-terminal-overlay,
+  [data-component="terminal"] {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #030303 0%, #080808 100%);
+  }
+
+  .hermes-terminal-overlay::after,
+  [data-component="terminal"]::after {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    content: "";
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.035) 0,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+    mix-blend-mode: screen;
+    opacity: 0.18;
+  }
+
+  .hermes-thinking-ring {
+    width: var(--hermes-thinking-ring-size, 1rem);
+    height: var(--hermes-thinking-ring-size, 1rem);
+    border: 1px solid rgba(0, 240, 255, 0.55);
+    border-top-color: #a855f7;
+    border-radius: 999px;
+    animation: hermes-thinking-ring var(--hermes-thinking-ring-speed, 900ms) linear infinite;
+  }
+
   @keyframes session-progress-whip {
     0% {
       clip-path: inset(0 100% 0 0 round 999px);

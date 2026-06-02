@@ -1,8 +1,8 @@
 declare global {
-  const OPENCODE_VERSION: string
-  const OPENCODE_CHANNEL: string
+  const NEXUSFLOW_VERSION: string
+  const NEXUSFLOW_CHANNEL: string
 }
 
-export const InstallationVersion = typeof OPENCODE_VERSION === "string" ? OPENCODE_VERSION : "local"
-export const InstallationChannel = typeof OPENCODE_CHANNEL === "string" ? OPENCODE_CHANNEL : "local"
+export const InstallationVersion = typeof NEXUSFLOW_VERSION === "string" ? NEXUSFLOW_VERSION : "local"
+export const InstallationChannel = typeof NEXUSFLOW_CHANNEL === "string" ? NEXUSFLOW_CHANNEL : "local"
 export const InstallationLocal = InstallationChannel === "local"

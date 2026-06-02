@@ -1,0 +1,46 @@
+export * as ConfigPaths from "./paths"
+
+import path from "path"
+import { Flag } from "@nexusflow/core/flag/flag"
+import { Global } from "@nexusflow/core/global"
+import { unique } from "remeda"
+import * as Effect from "effect/Effect"
+import { AppFileSystem } from "@nexusflow/core/filesystem"
+
+export const files = Effect.fn("ConfigPaths.projectFiles")(function* (
+  name: string,
+  directory: string,
+  worktree?: string,
+) {
+  const afs = yield* AppFileSystem.Service
+  const names = name === "nexusflow" ? ["nexusflow", "nexusflow"] : [name]
+  return (yield* afs.up({
+    targets: names.flatMap((item) => [`${item}.jsonc`, `${item}.json`]),
+    start: directory,
+    stop: worktree,
+  })).toReversed()
+})
+
+export const directories = Effect.fn("ConfigPaths.directories")(function* (directory: string, worktree?: string) {
+  const afs = yield* AppFileSystem.Service
+  return unique([
+    Global.Path.config,
+    ...(!Flag.NEXUSFLOW_DISABLE_PROJECT_CONFIG
+      ? yield* afs.up({
+          targets: [".nexusflow", ".nexusflow"],
+          start: directory,
+          stop: worktree,
+        })
+      : []),
+    ...(yield* afs.up({
+      targets: [".nexusflow", ".nexusflow"],
+      start: Global.Path.home,
+      stop: Global.Path.home,
+    })),
+    ...(Flag.NEXUSFLOW_CONFIG_DIR ? [Flag.NEXUSFLOW_CONFIG_DIR] : []),
+  ])
+})
+
+export function fileInDirectory(dir: string, name: string) {
+  return [path.join(dir, `${name}.json`), path.join(dir, `${name}.jsonc`)]
+}
