@@ -1,0 +1,43 @@
+{
+  "prompt": "Launch a new product on Shopify with SEO copy, schema markup, and performance audit",
+  "flow": "shopify-full-deployment",
+  "agents": [
+    "ecommerce-specialist",
+    "shopify-theme-specialist",
+    "shopify-section-builder",
+    "seo-strategist",
+    "content-writer",
+    "performance-engineer",
+    "quality-director",
+    "reporter"
+  ],
+  "tools": [
+    "shopify-graphql",
+    "shopify-api",
+    "seo-audit",
+    "schema-validator",
+    "lighthouse-runner"
+  ],
+  "skills": [
+    "shopify-sections",
+    "technical-seo",
+    "content-quality",
+    "web-performance"
+  ],
+  "expected_output_shape": {
+    "type": "object",
+    "required": [
+      "summary",
+      "activated_agents",
+      "artifacts",
+      "quality_gates",
+      "next_actions"
+    ]
+  },
+  "quality_gates": [
+    "all referenced agents exist",
+    "all referenced tools exist or have planned fallback",
+    "reporter produces final aggregation",
+    "quality-director reviews before final delivery"
+  ]
+}

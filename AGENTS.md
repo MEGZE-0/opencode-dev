@@ -210,6 +210,14 @@ NexusFlow is a local multi-agent orchestration system. `project-manager` identif
 | github-specialist | GitHub/DevOps | subagent | nexusflow/claude-sonnet-4-6 | GitHub automation |
 | devops-specialist | GitHub/DevOps | subagent | nexusflow/claude-sonnet-4-6 | deploy |
 | security-specialist | GitHub/DevOps | subagent | nexusflow/claude-opus-4-7 | security/auth |
+| frontend-engineer | High-level Specialist | subagent | nexusflow/claude-sonnet-4-6 | React 19 / Next.js 15 |
+| ecommerce-specialist | High-level Specialist | subagent | nexusflow/claude-sonnet-4-6 | Shopify / WooCommerce |
+| seo-strategist | High-level Specialist | subagent | nexusflow/claude-opus-4-7 | technical/local/AI SEO |
+| content-writer | High-level Specialist | subagent | nexusflow/claude-sonnet-4-6 | SEO and UX copy |
+| performance-engineer | High-level Specialist | subagent | nexusflow/claude-sonnet-4-6 | CWV/Lighthouse |
+| devops-engineer | High-level Specialist | subagent | nexusflow/claude-sonnet-4-6 | CI/CD and rollback |
+| quality-director | Quality | primary | nexusflow/claude-opus-4-7 | final quality gate |
+| prompt-engineer | Quality | subagent | nexusflow/claude-opus-4-7 | prompt architecture |
 
 ### Auto-Trigger Cheat Sheet
 
@@ -263,6 +271,10 @@ NexusFlow is a local multi-agent orchestration system. `project-manager` identif
 | meta-ads-reporter | META_ADS_ACCESS_TOKEN, META_ADS_ACCOUNT_ID | campaign metrics | JSON |
 | ga4-reporter | GA4_PROPERTY_ID, GA4_SERVICE_ACCOUNT_KEY | GA4 metrics | JSON |
 | lighthouse-runner | local lighthouse CLI | Lighthouse metrics | JSON/report |
+| github-api | GITHUB_TOKEN | typed GitHub REST helper | JSON |
+| lighthouse-ci | LHCI optional | Lighthouse CI planning/audit | JSON |
+| ai-search | BRAVE_SEARCH_API_KEY optional | AI/search result collection | JSON |
+| shopify-api | SHOPIFY_SHOP_DOMAIN, SHOPIFY_ADMIN_ACCESS_TOKEN | Shopify Admin helper | JSON |
 
 ### Skill Reference
 
@@ -290,6 +302,24 @@ NexusFlow is a local multi-agent orchestration system. `project-manager` identif
 | analytics | analytics/growth agents | 2026-06-12 |
 | conversion | growth/copy/commerce agents | 2026-06-12 |
 | desktop | desktop/devops/security agents | 2026-06-12 |
+| react-19-patterns | frontend-engineer, react-specialist | 2026-06-12 |
+| nextjs-app-router | frontend-engineer, nextjs-specialist | 2026-06-12 |
+| shopify-sections | ecommerce-specialist, shopify-section-builder | 2026-06-12 |
+| shopify-hydrogen | ecommerce-specialist, shopify-storefront-specialist | 2026-06-12 |
+| woocommerce-blocks | ecommerce-specialist, wordpress-woocommerce-specialist | 2026-06-12 |
+| technical-seo | seo-strategist, seo-specialist | 2026-06-12 |
+| local-seo | seo-strategist, local-seo-specialist | 2026-06-12 |
+| design-systems | ui-designer, frontend-engineer | 2026-06-12 |
+| web-performance | performance-engineer, performance-specialist | 2026-06-12 |
+| testing-strategy | tester, quality-director | 2026-06-12 |
+| git-workflow | github-specialist, devops-engineer | 2026-06-12 |
+| github-api-usage | github-specialist | 2026-06-12 |
+| ai-search-optimisation | seo-strategist, aeo-specialist, prompt-engineer | 2026-06-12 |
+| prompt-quality | prompt-engineer, quality-director | 2026-06-12 |
+
+### Claude Enhancement Brief
+
+The detailed handoff report for Claude lives at `.opencode/NEXUSFLOW_CLAUDE_PROMPT_BRIEF.md`. It explains the current agent inventory, subagent roles, parallel flow behavior, automatic trigger behavior, skill/tool usage, fixture expectations, quality rubrics, templates, and exact requirements for Claude to write a much stronger orchestration prompt.
 
 ### Parallel Flow Patterns
 

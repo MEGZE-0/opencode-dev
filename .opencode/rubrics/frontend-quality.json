@@ -1,0 +1,78 @@
+{
+  "id": "frontend-quality",
+  "name": "Frontend Quality",
+  "owner_agent": "frontend-engineer",
+  "version": "1.0.0",
+  "criteria": [
+    {
+      "id": "correctness",
+      "name": "correctness",
+      "description": "Scores correctness for Frontend Quality.",
+      "weight": 0.2,
+      "blocking": true,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "accessibility",
+      "name": "accessibility",
+      "description": "Scores accessibility for Frontend Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "performance",
+      "name": "performance",
+      "description": "Scores performance for Frontend Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "test-coverage",
+      "name": "test coverage",
+      "description": "Scores test coverage for Frontend Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "type-safety",
+      "name": "type safety",
+      "description": "Scores type safety for Frontend Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    }
+  ]
+}

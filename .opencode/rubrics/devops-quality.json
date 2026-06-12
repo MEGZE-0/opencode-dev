@@ -1,0 +1,78 @@
+{
+  "id": "devops-quality",
+  "name": "DevOps Quality",
+  "owner_agent": "devops-engineer",
+  "version": "1.0.0",
+  "criteria": [
+    {
+      "id": "pipeline-coverage",
+      "name": "pipeline coverage",
+      "description": "Scores pipeline coverage for DevOps Quality.",
+      "weight": 0.2,
+      "blocking": true,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "secret-hygiene",
+      "name": "secret hygiene",
+      "description": "Scores secret hygiene for DevOps Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "rollback-readiness",
+      "name": "rollback readiness",
+      "description": "Scores rollback readiness for DevOps Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "observability",
+      "name": "observability",
+      "description": "Scores observability for DevOps Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "deployment-safety",
+      "name": "deployment safety",
+      "description": "Scores deployment safety for DevOps Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "seo-quality",
+  "name": "SEO Quality",
+  "owner_agent": "seo-strategist",
+  "version": "1.0.0",
+  "criteria": [
+    {
+      "id": "technical-completeness",
+      "name": "technical completeness",
+      "description": "Scores technical completeness for SEO Quality.",
+      "weight": 0.2,
+      "blocking": true,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "keyword-relevance",
+      "name": "keyword relevance",
+      "description": "Scores keyword relevance for SEO Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "structured-data",
+      "name": "structured data",
+      "description": "Scores structured data for SEO Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "CWV-impact",
+      "name": "CWV impact",
+      "description": "Scores CWV impact for SEO Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "prioritization",
+      "name": "prioritization",
+      "description": "Scores prioritization for SEO Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    }
+  ]
+}

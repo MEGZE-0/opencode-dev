@@ -1,0 +1,36 @@
+{
+  "prompt": "Create a new colour token and propagate it through Storybook and Tailwind config",
+  "flow": "react-component-build",
+  "agents": [
+    "ui-designer",
+    "frontend-engineer",
+    "typescript-specialist",
+    "testing-frontend",
+    "quality-director",
+    "reporter"
+  ],
+  "tools": [
+    "brand-color-gen"
+  ],
+  "skills": [
+    "design-systems",
+    "react-19-patterns",
+    "testing-strategy"
+  ],
+  "expected_output_shape": {
+    "type": "object",
+    "required": [
+      "summary",
+      "activated_agents",
+      "artifacts",
+      "quality_gates",
+      "next_actions"
+    ]
+  },
+  "quality_gates": [
+    "all referenced agents exist",
+    "all referenced tools exist or have planned fallback",
+    "reporter produces final aggregation",
+    "quality-director reviews before final delivery"
+  ]
+}

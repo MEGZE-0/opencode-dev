@@ -1,0 +1,40 @@
+{
+  "prompt": "Audit and fix local SEO for a brick-and-mortar business",
+  "flow": "seo-triple-threat",
+  "agents": [
+    "seo-strategist",
+    "local-seo-specialist",
+    "aeo-specialist",
+    "geo-specialist",
+    "content-writer",
+    "quality-director",
+    "reporter"
+  ],
+  "tools": [
+    "seo-audit",
+    "schema-validator",
+    "keyword-research",
+    "ai-search"
+  ],
+  "skills": [
+    "technical-seo",
+    "local-seo",
+    "ai-search-optimisation"
+  ],
+  "expected_output_shape": {
+    "type": "object",
+    "required": [
+      "summary",
+      "activated_agents",
+      "artifacts",
+      "quality_gates",
+      "next_actions"
+    ]
+  },
+  "quality_gates": [
+    "all referenced agents exist",
+    "all referenced tools exist or have planned fallback",
+    "reporter produces final aggregation",
+    "quality-director reviews before final delivery"
+  ]
+}

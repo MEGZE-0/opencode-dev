@@ -215,5 +215,9 @@
     "meta-ads-reporter": false,
     "ga4-reporter": false,
     "lighthouse-runner": false,
+    "github-api": false,
+    "lighthouse-ci": false,
+    "ai-search": false,
+    "shopify-api": false,
   },
 }

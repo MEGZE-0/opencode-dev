@@ -1,0 +1,78 @@
+{
+  "id": "design-quality",
+  "name": "Design Quality",
+  "owner_agent": "ui-designer",
+  "version": "1.0.0",
+  "criteria": [
+    {
+      "id": "token-compliance",
+      "name": "token compliance",
+      "description": "Scores token compliance for Design Quality.",
+      "weight": 0.2,
+      "blocking": true,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "WCAG-AA",
+      "name": "WCAG AA",
+      "description": "Scores WCAG AA for Design Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "responsive-fidelity",
+      "name": "responsive fidelity",
+      "description": "Scores responsive fidelity for Design Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "motion-constraints",
+      "name": "motion constraints",
+      "description": "Scores motion constraints for Design Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "dark-mode",
+      "name": "dark mode",
+      "description": "Scores dark mode for Design Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    }
+  ]
+}

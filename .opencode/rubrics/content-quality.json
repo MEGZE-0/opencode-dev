@@ -1,0 +1,78 @@
+{
+  "id": "content-quality",
+  "name": "Content Quality",
+  "owner_agent": "content-writer",
+  "version": "1.0.0",
+  "criteria": [
+    {
+      "id": "BLUF-adherence",
+      "name": "BLUF adherence",
+      "description": "Scores BLUF adherence for Content Quality.",
+      "weight": 0.2,
+      "blocking": true,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "readability",
+      "name": "readability",
+      "description": "Scores readability for Content Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "CTA-clarity",
+      "name": "CTA clarity",
+      "description": "Scores CTA clarity for Content Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "brand-voice",
+      "name": "brand voice",
+      "description": "Scores brand voice for Content Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    },
+    {
+      "id": "SEO-alignment",
+      "name": "SEO alignment",
+      "description": "Scores SEO alignment for Content Quality.",
+      "weight": 0.2,
+      "blocking": false,
+      "scoring": {
+        "1": "Missing or actively harmful; blocks delivery when blocking is true.",
+        "2": "Present but incomplete, vague, or weakly evidenced.",
+        "3": "Acceptable baseline with clear evidence and minor gaps.",
+        "4": "Strong, specific, validated, and ready for normal delivery.",
+        "5": "Exceptional, deeply evidenced, reusable, and operator-ready."
+      }
+    }
+  ]
+}
