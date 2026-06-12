@@ -118,7 +118,7 @@ export const dict = {
   "dialog.model.manage.description": "Customize which models appear in the model selector.",
   "dialog.model.manage.provider.toggle": "Toggle all {{provider}} models",
 
-  "dialog.model.unpaid.freeModels.title": "Free models provided by NexusFlow",
+  "dialog.model.unpaid.freeModels.title": "Free models provided by Opencode",
   "dialog.model.unpaid.addMore.title": "Add more models from popular providers",
 
   "dialog.provider.viewAll": "Show more providers",
@@ -695,7 +695,7 @@ export const dict = {
   "sidebar.workspaces.enable": "Enable workspaces",
   "sidebar.workspaces.disable": "Disable workspaces",
   "sidebar.gettingStarted.title": "Getting started",
-  "sidebar.gettingStarted.line1": "NexusFlow includes free models so you can start immediately.",
+  "sidebar.gettingStarted.line1": "Opencode includes free models so you can start immediately.",
   "sidebar.gettingStarted.line2": "Connect any provider to use models, inc. Claude, GPT, Gemini etc.",
   "sidebar.project.recentSessions": "Recent sessions",
   "sidebar.project.viewAllSessions": "View all sessions",

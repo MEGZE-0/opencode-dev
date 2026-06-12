@@ -112,6 +112,20 @@ it.instance("provider loaded from env variable", () =>
   }),
 )
 
+it.instance("refresh reloads providers after credentials become available", () =>
+  Effect.gen(function* () {
+    yield* remove("OPENAI_API_KEY")
+    expect((yield* list)[ProviderID.openai]).toBeUndefined()
+
+    yield* set("OPENAI_API_KEY", "test-openai-key")
+    expect((yield* list)[ProviderID.openai]).toBeUndefined()
+
+    const provider = yield* Provider.Service
+    yield* provider.refresh()
+    expect((yield* list)[ProviderID.openai]).toBeDefined()
+  }),
+)
+
 it.instance(
   "provider loaded from config with apiKey option",
   Effect.gen(function* () {

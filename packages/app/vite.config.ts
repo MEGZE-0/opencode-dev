@@ -1,7 +1,9 @@
 import { sentryVitePlugin } from "@sentry/vite-plugin"
 import { defineConfig } from "vite"
-import monacoEditorPlugin from "vite-plugin-monaco-editor"
+import monacoEditorPluginDefault from "vite-plugin-monaco-editor"
 import desktopPlugin from "./vite"
+
+const monacoEditorPlugin = (monacoEditorPluginDefault as any).default || monacoEditorPluginDefault
 
 const sentry =
   process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT

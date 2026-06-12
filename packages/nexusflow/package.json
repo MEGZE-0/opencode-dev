@@ -99,14 +99,14 @@
     "@gitlab/opencode-gitlab-auth": "1.3.3",
     "@lydell/node-pty": "catalog:",
     "@modelcontextprotocol/sdk": "1.27.1",
-    "@octokit/graphql": "9.0.2",
-    "@octokit/rest": "catalog:",
-    "@openauthjs/openauth": "catalog:",
     "@nexusflow/llm": "workspace:*",
     "@nexusflow/plugin": "workspace:*",
     "@nexusflow/script": "workspace:*",
     "@nexusflow/sdk": "workspace:*",
     "@nexusflow/ui": "workspace:*",
+    "@octokit/graphql": "9.0.2",
+    "@octokit/rest": "catalog:",
+    "@openauthjs/openauth": "catalog:",
     "@openrouter/ai-sdk-provider": "2.8.1",
     "@opentelemetry/api": "1.9.0",
     "@opentelemetry/context-async-hooks": "2.6.1",
@@ -173,4 +173,3 @@
     "drizzle-orm": "catalog:"
   }
 }
-

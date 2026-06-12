@@ -1,3 +1,4 @@
+import * as http from "node:http"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { app, utilityProcess } from "electron"
@@ -209,22 +210,34 @@ export async function checkHealth(url: string, password?: string | null): Promis
     return false
   }
 
-  const headers = new Headers()
-  if (password) {
-    const auth = Buffer.from(`nexusflow:${password}`).toString("base64")
-    headers.set("authorization", `Basic ${auth}`)
-  }
-
-  try {
-    const res = await fetch(healthUrl, {
+  return new Promise((resolve) => {
+    const options: http.RequestOptions = {
       method: "GET",
-      headers,
-      signal: AbortSignal.timeout(3000),
+      timeout: 3000,
+    }
+    if (password) {
+      const auth = Buffer.from(`nexusflow:${password}`).toString("base64")
+      options.headers = { authorization: `Basic ${auth}` }
+    }
+
+    const req = http.get(healthUrl, options, (res: http.IncomingMessage) => {
+      // Consume response data to free up memory
+      res.on("data", () => {})
+      res.on("end", () => {
+        resolve(res.statusCode === 200)
+      })
     })
-    return res.ok
-  } catch {
-    return false
-  }
+
+    req.on("timeout", () => {
+      req.destroy()
+      resolve(false)
+    })
+
+    req.on("error", (err: Error) => {
+      console.warn("checkHealth http.get error:", err)
+      resolve(false)
+    })
+  })
 }
 
 function createSidecarEnv(): Record<string, string> {

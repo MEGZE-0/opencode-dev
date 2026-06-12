@@ -4,6 +4,8 @@ import type { IpcMainEvent, IpcMainInvokeEvent } from "electron"
 import type { DesktopMenuAction } from "@nexusflow/app/desktop-menu"
 
 import type {
+  DesktopFetchRequest,
+  DesktopFetchResponse,
   InitStep,
   FatalRendererError,
   ServerReadyData,
@@ -78,6 +80,9 @@ export function registerIpcHandlers(deps: Deps) {
   ipcMain.handle("record-fatal-renderer-error", (_event: IpcMainInvokeEvent, error: FatalRendererError) =>
     deps.recordFatalRendererError(error),
   )
+  ipcMain.handle("desktop-fetch", async (_event: IpcMainInvokeEvent, request: DesktopFetchRequest) => {
+    return desktopFetch(request)
+  })
   ipcMain.handle("store-get", (_event: IpcMainInvokeEvent, name: string, key: string) => {
     try {
       const store = getStore(name)
@@ -226,4 +231,25 @@ export function sendMenuCommand(win: BrowserWindow, id: string) {
 
 export function sendDeepLinks(win: BrowserWindow, urls: string[]) {
   win.webContents.send("deep-link", urls)
+}
+
+async function desktopFetch(request: DesktopFetchRequest): Promise<DesktopFetchResponse> {
+  const response = await fetch(request.url, {
+    method: request.method,
+    headers: Object.fromEntries(request.headers),
+    body: request.body ? Buffer.from(request.body) : undefined,
+    redirect: "follow",
+  })
+
+  return {
+    url: response.url,
+    redirected: response.redirected,
+    status: response.status,
+    statusText: response.statusText,
+    headers: Array.from(response.headers.entries()),
+    body:
+      request.method === "HEAD" || response.status === 101 || response.status === 204 || response.status === 205 || response.status === 304
+        ? undefined
+        : await response.arrayBuffer(),
+  }
 }

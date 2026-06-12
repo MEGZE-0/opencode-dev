@@ -177,19 +177,33 @@ export const layer = Layer.effect(
     })
 
     const populate = Effect.gen(function* () {
+      let data: Record<string, Provider> | undefined
       const fromDisk = yield* loadFromDisk
-      if (fromDisk) return fromDisk
-      const snapshot = yield* loadSnapshot
-      if (snapshot) return snapshot
-      if (Flag.NEXUSFLOW_DISABLE_MODELS_FETCH) return {}
-      // Flock is cross-process: concurrent nexusflow CLIs can race on this cache file.
-      const text = yield* Effect.scoped(
-        Effect.gen(function* () {
-          yield* Flock.effect(lockKey)
-          return yield* fetchAndWrite()
-        }),
-      )
-      return JSON.parse(text) as Record<string, Provider>
+      if (fromDisk) {
+        data = fromDisk
+      } else {
+        const snapshot = yield* loadSnapshot
+        if (snapshot) {
+          data = snapshot
+        } else if (Flag.NEXUSFLOW_DISABLE_MODELS_FETCH) {
+          data = {}
+        } else {
+          // Flock is cross-process: concurrent nexusflow CLIs can race on this cache file.
+          const text = yield* Effect.scoped(
+            Effect.gen(function* () {
+              yield* Flock.effect(lockKey)
+              return yield* fetchAndWrite()
+            }),
+          )
+          data = JSON.parse(text) as Record<string, Provider>
+        }
+      }
+
+      if (data && data["opencode"] && !data["nexusflow"]) {
+        data["nexusflow"] = { ...data["opencode"], id: "nexusflow", name: "NexusFlow" }
+      }
+
+      return data
     }).pipe(Effect.withSpan("ModelsDev.populate"), Effect.orDie)
 
     const [cachedGet, invalidate] = yield* Effect.cachedInvalidateWithTTL(populate, Duration.infinity)

@@ -188,7 +188,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
 
       if (!ok) {
         for (const [key, value] of Object.entries(input.models)) {
-          if (value.cost.input === 0) continue
+          if (value.cost.input === 0 || key.toLowerCase().includes("free")) continue
           delete input.models[key]
         }
       }
@@ -1032,6 +1032,7 @@ export interface Interface {
   ) => Effect.Effect<{ providerID: ProviderID; modelID: string } | undefined>
   readonly getSmallModel: (providerID: ProviderID) => Effect.Effect<Model | undefined>
   readonly defaultModel: () => Effect.Effect<{ providerID: ProviderID; modelID: ModelID }, DefaultModelError>
+  readonly refresh: () => Effect.Effect<void>
 }
 
 interface State {
@@ -1392,7 +1393,7 @@ export const layer = Layer.effect(
           const providerID = ProviderID.make(id)
           if (disabled.has(providerID)) continue
           const apiKey = provider.env.map((item) => envs[item]).find(Boolean)
-          if (!apiKey) continue
+          if (!apiKey && provider.env.length > 0) continue
           mergeProvider(providerID, {
             source: "env",
             key: provider.env.length === 1 ? apiKey : undefined,
@@ -1541,6 +1542,9 @@ export const layer = Layer.effect(
     )
 
     const list = Effect.fn("Provider.list")(() => InstanceState.use(state, (s) => s.providers))
+    const refresh = Effect.fn("Provider.refresh")(function* () {
+      yield* InstanceState.invalidate(state)
+    })
 
     async function resolveSDK(model: Model, s: State, envs: Record<string, string | undefined>) {
       try {
@@ -1860,7 +1864,7 @@ export const layer = Layer.effect(
       }
     })
 
-    return Service.of({ list, getProvider, getModel, getLanguage, closest, getSmallModel, defaultModel })
+    return Service.of({ list, getProvider, getModel, getLanguage, closest, getSmallModel, defaultModel, refresh })
   }),
 )
 

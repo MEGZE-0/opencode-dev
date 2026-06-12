@@ -27,7 +27,7 @@ const CHANNEL = await (async () => {
   if (env.NEXUSFLOW_CHANNEL) return env.NEXUSFLOW_CHANNEL
   if (env.NEXUSFLOW_BUMP) return "latest"
   if (env.NEXUSFLOW_VERSION && !env.NEXUSFLOW_VERSION.startsWith("0.0.0-")) return "latest"
-  return await $`git branch --show-current`.text().then((x) => x.trim())
+  return await $`git branch --show-current`.text().then((x) => x.trim()).catch(() => "dev")
 })()
 const IS_PREVIEW = CHANNEL !== "latest"
 

@@ -9,6 +9,7 @@ import { createSolidTransformPlugin } from "@opentui/solid/bun-plugin"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const dir = path.resolve(__dirname, "..")
+const appDir = path.resolve(dir, "../app")
 
 process.chdir(dir)
 
@@ -56,9 +57,15 @@ const skipEmbedWebUi = process.argv.includes("--skip-embed-web-ui")
 
 const createEmbeddedWebUIBundle = async () => {
   console.log(`Building Web UI to embed in the binary`)
-  const appDir = path.join(import.meta.dirname, "../../app")
+  if (process.platform === "win32") {
+  console.log("Skipping embedded UI build on Windows to avoid Vite crash");
+  return null;
+}
+
   const dist = path.join(appDir, "dist")
-  await $`NEXUSFLOW_CHANNEL=${Script.channel} bun run --cwd ${appDir} build`
+  const viteScript = path.join(appDir, "node_modules", "vite", "bin", "vite.js")
+  // On Windows bun run crashes with certain WASM modules; use node directly
+  await $`node ${viteScript} build`.env({ ...process.env, NEXUSFLOW_CHANNEL: Script.channel }).cwd(appDir)
   const files = (await Array.fromAsync(new Bun.Glob("**/*").scan({ cwd: dist })))
     .map((file) => file.replaceAll("\\", "/"))
     .filter((file) => !file.endsWith(".map"))
@@ -143,26 +150,9 @@ const allTargets: {
   },
 ]
 
-const targets = singleFlag
-  ? allTargets.filter((item) => {
-      if (item.os !== process.platform || item.arch !== process.arch) {
-        return false
-      }
-
-      // When building for the current platform, prefer a single native binary by default.
-      // Baseline binaries require additional Bun artifacts and can be flaky to download.
-      if (item.avx2 === false) {
-        return baselineFlag
-      }
-
-      // also skip abi-specific builds for the same reason
-      if (item.abi !== undefined) {
-        return false
-      }
-
-      return true
-    })
-  : allTargets
+const targets = process.platform === "win32"
+  ? allTargets.filter(item => item.os === "win32" && item.arch === "x64" && item.avx2 !== false)
+  : allTargets;
 
 await $`rm -rf dist`
 

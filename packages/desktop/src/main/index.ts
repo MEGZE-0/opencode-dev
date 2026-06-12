@@ -219,6 +219,7 @@ const main = Effect.gen(function* () {
   }
 
   const serverReady = Deferred.makeUnsafe<ServerReadyData>()
+  const initComplete = Deferred.makeUnsafe<void>()
   const loadingComplete = Deferred.makeUnsafe<void>()
 
   registerIpcHandlers({
@@ -231,7 +232,11 @@ const main = Effect.gen(function* () {
         try {
           logger.log("awaiting server ready")
           const res = yield* Deferred.await(serverReady)
-          logger.log("server ready", { url: res.url })
+          logger.log("server ready resolved", { res })
+          logger.log("awaiting initComplete")
+          yield* Deferred.await(initComplete)
+          logger.log("initComplete resolved")
+          logger.log("server ready", { url: res?.url })
           return res
         } finally {
           initEmitter.off("step", listener)
@@ -251,7 +256,7 @@ const main = Effect.gen(function* () {
     checkAppExists: (appName) => checkAppExists(appName),
     wslPath: async (path, mode) => wslPath(path, mode),
     resolveAppPath: async (appName) => resolveAppPath(appName),
-    loadingWindowComplete: () => Deferred.doneUnsafe(loadingComplete, Effect.void),
+    loadingWindowComplete: () => Effect.runSync(Deferred.succeed(loadingComplete, undefined as void)),
     runUpdater: async (alertOnFail) => checkForUpdates(alertOnFail, killSidecar),
     checkUpdate: async () => checkUpdate(),
     installUpdate: async () => installUpdate(killSidecar),
@@ -337,7 +342,7 @@ const main = Effect.gen(function* () {
     server = listener
     yield* Deferred.succeed(serverReady, {
       url,
-      username: "opencode",
+      username: "nexusflow",
       password,
     })
 
@@ -366,8 +371,12 @@ const main = Effect.gen(function* () {
     }
   }
 
-  yield* Fiber.await(loadingTask)
+  const loadingTaskExit = yield* Fiber.await(loadingTask)
+  logger.log("Fiber.await(loadingTask) returned", { exit: loadingTaskExit })
   setInitStep({ phase: "done" })
+  logger.log("Calling Deferred.succeed(initComplete)")
+  const succeedRes = yield* Deferred.succeed(initComplete, undefined as void)
+  logger.log("Deferred.succeed(initComplete) returned", { succeedRes })
 
   if (overlay) yield* Deferred.await(loadingComplete)
 

@@ -21,7 +21,7 @@ export const OpencodePlugin = PluginV2.define({
         })
         if (hasKey) return
         for (const model of item.models.values()) {
-          if (!model.cost.some((cost) => cost.input > 0)) continue
+          if (!model.cost.some((cost) => cost.input > 0) || model.id.toLowerCase().includes("free")) continue
           evt.model.update(item.provider.id, model.id, (draft) => {
             draft.enabled = false
           })

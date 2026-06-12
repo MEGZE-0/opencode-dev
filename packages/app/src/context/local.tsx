@@ -62,7 +62,7 @@ export const { use: useLocal, provider: LocalProvider } = createSimpleContext({
 
     const id = createMemo(() => params.id || undefined)
     const list = createMemo(() => sync.data.agent.filter((item) => item.mode !== "subagent" && !item.hidden))
-    const connected = createMemo(() => new Set(providers.connected().map((item) => item.id)))
+    const connected = createMemo(() => new Map(providers.connected().map((item) => [item.id, item])))
 
     const [saved, setSaved] = persisted(
       {
@@ -90,8 +90,8 @@ export const { use: useLocal, provider: LocalProvider } = createSimpleContext({
     })
 
     const validModel = (model: ModelKey) => {
-      const provider = providers.all().get(model.providerID)
-      return !!provider?.models[model.modelID] && connected().has(model.providerID)
+      const provider = connected().get(model.providerID)
+      return !!provider?.models[model.modelID]
     }
 
     const firstModel = (...items: Array<() => ModelKey | undefined>) => {

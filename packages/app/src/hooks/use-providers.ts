@@ -16,6 +16,16 @@ export const popularProviders = [
 ]
 const popularProviderSet = new Set(popularProviders)
 
+function freeModels(provider: Provider) {
+  if (provider.id !== "nexusflow") return {}
+  return Object.fromEntries(
+    Object.entries(provider.models).filter(
+      ([id, model]) =>
+        model.status !== "deprecated" && (!model.cost || model.cost.input === 0 || id.toLowerCase().includes("free")),
+    ),
+  )
+}
+
 export function useProviders() {
   const serverSync = useServerSync()
   const params = useParams()
@@ -34,7 +44,12 @@ export function useProviders() {
       Array.from(providers().all.values()).filter((provider: Provider) => popularProviderSet.has(provider.id)),
     connected: () => {
       const connected = new Set(providers().connected)
-      return Array.from(providers().all.values()).filter((provider: Provider) => connected.has(provider.id))
+      return Array.from(providers().all.values()).flatMap((provider: Provider) => {
+        if (connected.has(provider.id)) return [provider]
+        const models = freeModels(provider)
+        if (Object.keys(models).length === 0) return []
+        return [{ ...provider, models }]
+      })
     },
     paid: () => {
       const connected = new Set(providers().connected)

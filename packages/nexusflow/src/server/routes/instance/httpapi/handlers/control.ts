@@ -1,4 +1,5 @@
 import { Auth } from "@/auth"
+import { Provider } from "@/provider/provider"
 import { ProviderID } from "@/provider/schema"
 import * as Log from "@nexusflow/core/util/log"
 import { Effect } from "effect"
@@ -9,17 +10,20 @@ import { LogInput } from "../groups/control"
 export const controlHandlers = HttpApiBuilder.group(RootHttpApi, "control", (handlers) =>
   Effect.gen(function* () {
     const auth = yield* Auth.Service
+    const provider = yield* Provider.Service
 
     const authSet = Effect.fn("ControlHttpApi.authSet")(function* (ctx: {
       params: { providerID: ProviderID }
       payload: Auth.Info
     }) {
       yield* auth.set(ctx.params.providerID, ctx.payload).pipe(Effect.orDie)
+      yield* provider.refresh()
       return true
     })
 
     const authRemove = Effect.fn("ControlHttpApi.authRemove")(function* (ctx: { params: { providerID: ProviderID } }) {
       yield* auth.remove(ctx.params.providerID).pipe(Effect.orDie)
+      yield* provider.refresh()
       return true
     })
 

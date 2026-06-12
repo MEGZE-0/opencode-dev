@@ -28,6 +28,22 @@ export type FatalRendererError = {
   os?: string
 }
 
+export type DesktopFetchRequest = {
+  url: string
+  method: string
+  headers: [string, string][]
+  body?: ArrayBuffer
+}
+
+export type DesktopFetchResponse = {
+  url: string
+  redirected: boolean
+  status: number
+  statusText: string
+  headers: [string, string][]
+  body?: ArrayBuffer
+}
+
 export type ElectronAPI = {
   killSidecar: () => Promise<void>
   installCli: () => Promise<string>
@@ -92,4 +108,5 @@ export type ElectronAPI = {
   setBackgroundColor: (color: string) => Promise<void>
   exportDebugLogs: () => Promise<string>
   recordFatalRendererError: (error: FatalRendererError) => Promise<void>
+  desktopFetch: (request: DesktopFetchRequest) => Promise<DesktopFetchResponse>
 }

@@ -372,6 +372,7 @@ function wireWindowRecovery(win: BrowserWindow, name: string) {
     sampler.stopAndFlush()
   })
   win.webContents.on("console-message", (_event, level, message, line, sourceId) => {
+    console.log(`[Renderer Console] ${level} ${sourceId}:${line} ${message}`)
     if (message.toLowerCase().includes("terminal") || sourceId.toLowerCase().includes("terminal")) {
       writeLog("pty", "console", { window: name, level, message, line, sourceId })
     }

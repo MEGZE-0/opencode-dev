@@ -20,6 +20,7 @@ import { MemoryRouter } from "@solidjs/router"
 import { createEffect, createResource, onCleanup, onMount, Show } from "solid-js"
 import { render } from "solid-js/web"
 import pkg from "../../package.json"
+import type { DesktopFetchRequest } from "../preload/types"
 import { initI18n, t } from "./i18n"
 import { resetZoom, setPinchZoomEnabled, webviewZoom, zoomIn, zoomOut } from "./webview-zoom"
 import "./styles.css"
@@ -68,6 +69,36 @@ const emitDeepLinks = (urls: string[]) => {
 const listenForDeepLinks = () => {
   void window.api.consumeInitialDeepLinks().then((urls) => emitDeepLinks(urls))
   return window.api.onDeepLink((urls) => emitDeepLinks(urls))
+}
+
+const desktopFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+  const request = input instanceof Request ? new Request(input, init) : new Request(input, init)
+  const response = await abortableDesktopFetch(request, {
+    url: request.url,
+    method: request.method,
+    headers: Array.from(request.headers.entries()),
+    body: request.body ? await request.arrayBuffer() : undefined,
+  })
+
+  return new Response(response.body ?? null, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: response.headers,
+  })
+}
+
+function abortableDesktopFetch(request: Request, input: DesktopFetchRequest) {
+  const pending = window.api.desktopFetch(input)
+  if (request.signal.aborted) return Promise.reject(new DOMException("Aborted", "AbortError"))
+
+  let cleanup = () => {}
+  const aborted = new Promise<never>((_, reject) => {
+    const onAbort = () => reject(new DOMException("Aborted", "AbortError"))
+    cleanup = () => request.signal.removeEventListener("abort", onAbort)
+    request.signal.addEventListener("abort", onAbort, { once: true })
+  })
+
+  return Promise.race([pending, aborted]).finally(cleanup)
 }
 
 const createPlatform = (): Platform => {
@@ -241,10 +272,7 @@ const createPlatform = (): Platform => {
       }
     },
 
-    fetch: (input, init) => {
-      if (input instanceof Request) return fetch(input)
-      return fetch(input, init)
-    },
+    fetch: desktopFetch,
 
     getWslEnabled: () => isWslEnabled(),
 
@@ -388,6 +416,7 @@ render(() => {
             !windowCount.loading &&
             !locale.loading
           }
+          fallback={<div />}
         >
           {(_) => {
             return (

@@ -14,7 +14,7 @@
     "predev": "bun ./scripts/predev.ts",
     "dev": "electron-vite dev",
     "prebuild": "bun ./scripts/prebuild.ts",
-    "build": "electron-vite build",
+    "build": "bun x electron-vite build",
     "preview": "electron-vite preview",
     "package": "electron-builder --config electron-builder.config.ts",
     "package:mac": "electron-builder --mac --config electron-builder.config.ts",
@@ -32,6 +32,7 @@
     "electron-updater": "^6",
     "electron-window-state": "^5.0.3",
     "drizzle-orm": "catalog:",
+    "jsonc-parser": "3.3.1",
     "marked": "^15"
   },
   "devDependencies": {
@@ -49,7 +50,7 @@
     "@types/node": "catalog:",
     "@typescript/native-preview": "catalog:",
     "@valibot/to-json-schema": "1.6.0",
-    "electron": "41.2.1",
+    "electron": "42.3.3",
     "electron-builder": "^26",
     "electron-vite": "^5",
     "solid-js": "catalog:",
@@ -75,4 +76,3 @@
     "@parcel/watcher-win32-x64": "2.5.1"
   }
 }
-

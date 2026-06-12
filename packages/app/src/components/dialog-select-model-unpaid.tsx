@@ -47,7 +47,7 @@ export const DialogSelectModelUnpaid: Component<{ model?: ModelState }> = (props
         <List
           class="[&_[data-slot=list-scroll]]:overflow-visible"
           ref={(ref) => (listRef = ref)}
-          items={model.list}
+          items={model.list()}
           current={model.current()}
           key={(x) => `${x.provider.id}:${x.id}`}
           itemWrapper={(item, node) => (
@@ -59,7 +59,10 @@ export const DialogSelectModelUnpaid: Component<{ model?: ModelState }> = (props
                 <ModelTooltip
                   model={item}
                   latest={item.latest}
-                  free={item.provider.id === "nexusflow" && (!item.cost || item.cost.input === 0)}
+                  free={
+                    item.provider.id === "nexusflow" &&
+                    (!item.cost || item.cost.input === 0 || item.id.toLowerCase().includes("free"))
+                  }
                 />
               }
             >
